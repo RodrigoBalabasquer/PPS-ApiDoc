@@ -1143,28 +1143,6 @@ define({ "api": [
   {
     "type": "exportarCSV()",
     "url": "-",
-    "title": "Exportacíon de archivos csv",
-    "version": "0.1.0",
-    "group": "Lista_Asistencia",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "optional": false,
-            "field": "void",
-            "description": "<p>Descarga archivo excel a la ruta android/data/io.ionic.jujuro</p>"
-          }
-        ]
-      }
-    },
-    "filename": "pages/lista-asistencia/lista-asistencia.ts",
-    "groupTitle": "Lista_Asistencia",
-    "name": "Exportarcsv__"
-  },
-  {
-    "type": "exportarCSV()",
-    "url": "-",
     "title": "Exportacíon de archivos pdf",
     "version": "0.1.0",
     "group": "Lista_Asistencia",
@@ -1176,6 +1154,28 @@ define({ "api": [
             "optional": false,
             "field": "Descarga",
             "description": "<p>archivo pdf a ruta a eleccion</p>"
+          }
+        ]
+      }
+    },
+    "filename": "pages/lista-asistencia/lista-asistencia.ts",
+    "groupTitle": "Lista_Asistencia",
+    "name": "Exportarcsv__"
+  },
+  {
+    "type": "exportarCSV()",
+    "url": "-",
+    "title": "Exportacíon de archivos csv",
+    "version": "0.1.0",
+    "group": "Lista_Asistencia",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "void",
+            "description": "<p>Descarga archivo excel a la ruta android/data/io.ionic.jujuro</p>"
           }
         ]
       }
@@ -1371,7 +1371,7 @@ define({ "api": [
             "group": "Error 4xx",
             "optional": false,
             "field": "ErrorUser",
-            "description": "<p>Mostrara un alert si la encuesta ya fue hecha por el usuario</p>"
+            "description": "<p>Mostrara un alert si la encuesta ya fue respondida por el usuario</p>"
           }
         ]
       }
@@ -2350,6 +2350,41 @@ define({ "api": [
     "name": "Registrarpersonal__"
   },
   {
+    "type": "agregarMaterias()",
+    "url": "-",
+    "title": "Agrega materia al usuario",
+    "version": "0.1.0",
+    "group": "Registro_alumno",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "usuario",
+            "description": "<p>usuario pasado por archivo</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "void",
+            "description": "<p>Carga al usuario al firebase con nombre, apellido, legajo, cantidad de faltas 0 y en materia Laboratorio IV por defecto</p>"
+          }
+        ]
+      }
+    },
+    "filename": "pages/registro-alumno/registro-alumno.ts",
+    "groupTitle": "Registro_alumno",
+    "name": "Agregarmaterias__"
+  },
+  {
     "type": "cancelar()",
     "url": "-",
     "title": "",
@@ -2589,6 +2624,50 @@ define({ "api": [
     "name": "Habilitaralumno__HttpsConsoleFirebaseGoogleComProjectTestauth12ddcDatabaseTestauth12ddcDataUsuarios"
   },
   {
+    "type": "mandarAlServidor()",
+    "url": "-",
+    "title": "Manda el archivo al servidor",
+    "version": "0.1.0",
+    "group": "Registro_alumno",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "FileUploader",
+            "optional": false,
+            "field": "uploader",
+            "description": "<p>archivo importado</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "void",
+            "description": "<p>Manda el archivo al servidor y carga a los nuevos alumnos que no esten en el sistema</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 \n{\n  \"error\": \"Can'tOpenFile\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "pages/registro-alumno/registro-alumno.ts",
+    "groupTitle": "Registro_alumno",
+    "name": "Mandaralservidor__"
+  },
+  {
     "type": "regCsv()",
     "url": "-",
     "title": "Formulario para carga de archivo",
@@ -2633,6 +2712,48 @@ define({ "api": [
     "name": "Registraralumno__"
   },
   {
+    "type": "separarComas()",
+    "url": "-",
+    "title": "Separa el nombre y el apellido",
+    "version": "0.1.0",
+    "group": "Registro_alumno",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "obj",
+            "description": "<p>Nombre y apellido del usuario pasado por archivo</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "Object",
+            "description": "<p>Devuelve un objeto con los campos nombre y apellido separados</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n   \"code\": 0,\n   \"response\": {nombre:\"Rodrigo\",apellido:\"Balabasquer\"}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "pages/registro-alumno/registro-alumno.ts",
+    "groupTitle": "Registro_alumno",
+    "name": "Separarcomas__"
+  },
+  {
     "type": "verificarSiExisteArchivo()",
     "url": "-",
     "title": "Verifica que el usuario no se encuestre en el archivo",
@@ -2658,22 +2779,26 @@ define({ "api": [
             "group": "Success 200",
             "optional": false,
             "field": "bool",
-            "description": "<p>Devuelve true si el usuario no se encontraba en el sistema</p>"
+            "description": "<p>true/false Devuelve true si el usuario no se encontraba en el sistema y false si ya existía</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n   \"code\": 0,\n   \"response\": true\n}",
+          "type": "json"
+        }
+      ]
     },
     "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "ErrorUser",
-            "description": "<p>Devuelve true si el usuario se encontraba en el sistema</p>"
-          }
-        ]
-      }
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1  Already exist\n{\n  \"error\": \"UserAlreadyExist\"\n}",
+          "type": "json"
+        }
+      ]
     },
     "filename": "pages/registro-alumno/registro-alumno.ts",
     "groupTitle": "Registro_alumno",
